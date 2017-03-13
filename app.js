@@ -7,7 +7,9 @@ var nunjucks = require('nunjucks');
 var bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
 var path = require('path');
+var models = require('./models');
 var app = express();
+
 // var makesRouter = require('./routes');
 // var fs = require('fs');
 
@@ -30,7 +32,14 @@ app.get('/', function(req, res){
   res.render('index');
 });
 
-// start the server
-var server = app.listen(1337, function(){
-  console.log('listening on port 1337');
-});
+//synchronising up with the models.
+models.User.sync({})
+.then(function() {
+  return models.Page.sync({})
+})
+.then(function() {
+  app.listen(3000, function() {
+    console.log('Server is listening on port 3000!');
+  });
+})
+.catch(console.error);
