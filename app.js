@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
 var path = require('path');
 var models = require('./models');
+var wikiRouter = require('./routes/wiki');
 var app = express();
 
 // var makesRouter = require('./routes');
@@ -26,6 +27,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // for HTML form submits
 app.use(bodyParser.json()); // would be for AJAX requests
 
 app.use(express.static(path.join(__dirname, '/public')));
+
+app.use('/wiki', wikiRouter);
 
 models.User.sync({})
 .then(function () {

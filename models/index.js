@@ -1,6 +1,5 @@
 var Sequelize = require('sequelize');
-<<<<<<< HEAD
-var db = new Sequelize('postgres://localhost:3000/wikistack', {
+var db = new Sequelize('postgres://localhost:5432/wikistack', {
     logging: false
 });
 
