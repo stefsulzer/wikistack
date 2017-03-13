@@ -6,11 +6,11 @@ var morgan = require('morgan');
 var nunjucks = require('nunjucks');
 var bodyParser = require('body-parser');
 var Sequelize = require('sequelize');
-
-// var makesRouter = require('./routes');
-// var fs = require('fs');
 var path = require('path');
 var app = express();
+// var makesRouter = require('./routes');
+// var fs = require('fs');
+
 
 // templating boilerplate setup
 app.engine('html', nunjucks.render); // how to render html templates
@@ -26,7 +26,7 @@ app.use(bodyParser.json()); // would be for AJAX requests
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.get('/', function(req, res) {
+app.get('/', function(req, res){
   res.render('index');
 });
 
