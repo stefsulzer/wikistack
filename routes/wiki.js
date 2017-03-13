@@ -8,9 +8,11 @@ router.get('/', function(req, res, next) {
   res.end(); // DON"T LEAVE IT HANGING
 });
 
-router.post('/', function(req, res, next) {
-  // req.body
-  // res.('addpage');
+router.post('/add', function(req, res, next) {
+  if(!req.body) return res.sendStatus(400);
+  console.log(Object.keys(req.body));
+  res.json(req.body);
+  // res.redirect('/');//this tries to change the headers, for which we get an error: Can't set headers after they are sent
   next();
 });
 
