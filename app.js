@@ -13,7 +13,6 @@ var app = express();
 // var makesRouter = require('./routes');
 // var fs = require('fs');
 
-
 // templating boilerplate setup
 app.engine('html', nunjucks.render); // how to render html templates
 app.set('view engine', 'html'); // what file extension do our templates have
@@ -28,18 +27,18 @@ app.use(bodyParser.json()); // would be for AJAX requests
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.get('/', function(req, res){
-  res.render('index');
-});
-
-//synchronising up with the models.
 models.User.sync({})
-.then(function() {
-  return models.Page.sync({})
+.then(function () {
+    return models.Page.sync({})
 })
-.then(function() {
-  app.listen(3000, function() {
-    console.log('Server is listening on port 3000!');
-  });
+.then(function () {
+    app.listen(3000, function () {
+        console.log('Server is listening on port 3000!');
+    });
 })
 .catch(console.error);
+
+
+// app.get('/', function(req, res){
+//   res.render('index');
+// });
