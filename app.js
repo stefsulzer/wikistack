@@ -6,6 +6,7 @@ var nunjucks = require('nunjucks');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 var path = require('path');
+var models = require('./models');
 
 // templating boilerplate setup
 app.engine('html', nunjucks.render); // how to render html templates
@@ -19,13 +20,20 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true })); // for HTML form submits
 app.use(bodyParser.json()); // would be for AJAX requests
 
-// start the server
-var server = app.listen(1337, function(){
-  console.log('listening on port 1337');
-});
-
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.get('/', function(req, res){
-  res.render('index');
-});
+models.User.sync({})
+.then(function () {
+    return models.Page.sync({})
+})
+.then(function () {
+    app.listen(3000, function () {
+        console.log('Server is listening on port 3000!');
+    });
+})
+.catch(console.error);
+
+
+// app.get('/', function(req, res){
+//   res.render('index');
+// });
