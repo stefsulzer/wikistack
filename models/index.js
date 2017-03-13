@@ -19,11 +19,11 @@ var Page = db.define('page', {
     status: {
         type: Sequelize.ENUM('open', 'closed'),
         defaultValue: 'open'
-    },
-    date: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
     }
+    // date: {
+    //     type: Sequelize.DATE,
+    //     defaultValue: Sequelize.NOW
+    // }
 },
     {
       getterMethods: {
@@ -31,6 +31,11 @@ var Page = db.define('page', {
           return '/wiki/' + this.urlTitle;
         }
       }
+  });
+
+  Page.hook('beforeValidate', function(page, options){
+      page.urlTitle = page.title.replace(/\s+/g, '_').replace(/\W/g, '');
+      console.log(page.urlTitle);
   });
 
 var User = db.define('user', {
