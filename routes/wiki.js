@@ -11,9 +11,11 @@ router.get('/', function(req, res, next) {
 router.post('/add', function(req, res, next) {
   if(!req.body) return res.sendStatus(400);
   console.log(Object.keys(req.body));
-  res.json(req.body);
-  // res.redirect('/');//this tries to change the headers, for which we get an error: Can't set headers after they are sent
-  next();
+  res.json(req.body);//res.json sets headers?
+
+  // res.redirect('/');
+  // //this tries to change the headers, for which we get an error: Can't set headers after they are sent
+  // next();
 });
 
 router.get('/add', function(req, res, next) {
